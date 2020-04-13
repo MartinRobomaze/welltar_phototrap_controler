@@ -20,7 +20,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-
 private const val SENT = "SMS_SENT"
 private const val DELIVERED = "SMS_DELIVERED"
 var phoneNumber = ""
@@ -37,17 +36,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS,
-                                                                    Manifest.permission.SEND_SMS),
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS),
                                                                     requestReceiveSMS)
         }
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
 
         val statusText = findViewById<TextView>(R.id.state)
 
@@ -151,8 +143,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun sendSMS(command: String, data: String) {
-        val smsReceiver = SmsReceiver()
-
         val message = "$command*$data#"
 
         val piSent = PendingIntent.getBroadcast(
@@ -168,20 +158,5 @@ class MainActivity : AppCompatActivity() {
             phoneNumber, null, message,
             piSent, piDelivered
         )
-
-        object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                if (smsReceiver.newMessage) {
-                    if (smsReceiver.message == SEND_SUCCESS_MESSAGE || smsReceiver.number == phoneNumber) {
-                        status = 0
-                        cancel()
-                    }
-                }
-            }
-
-            override fun onFinish() {
-                status = 2
-            }
-        }.start()
     }
 }
