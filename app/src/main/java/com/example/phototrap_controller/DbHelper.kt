@@ -28,19 +28,24 @@ class DatabaseHelper(context: Context) :
         db.insert(TABLE_NAME, null, contentValues)
     }
 
-    fun updateData(id: String, name: String, phoneNumber: String): Boolean {
+    fun updateData(previousName: String, name: String, phoneNumber: String): Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_1, id)
         contentValues.put(COL_2, name)
         contentValues.put(COL_3, phoneNumber)
-        db.update(TABLE_NAME, contentValues, "ID = ?", arrayOf(id))
+        db.update(TABLE_NAME, contentValues, "NAME = ?", arrayOf(previousName))
         return true
     }
 
-    fun deleteData(id : String) : Int {
+    fun deleteData(name : String) : Int {
         val db = this.writableDatabase
-        return db.delete(TABLE_NAME,"ID = ?", arrayOf(id))
+        return db.delete(TABLE_NAME,"NAME = ?", arrayOf(name))
+    }
+
+    fun getPhoneNumber(name: String) : Cursor {
+        val db = this.writableDatabase
+        val res = db.rawQuery("SELECT $COL_3 FROM $TABLE_NAME WHERE $COL_2 = $name", null)
+        return res
     }
 
     val allData : Cursor
@@ -56,6 +61,7 @@ class DatabaseHelper(context: Context) :
         val res = db.rawQuery("SELECT $COL_2 FROM $TABLE_NAME", null)
         return res
     }
+
 
     companion object {
         val DATABASE_NAME = "phototraps.db"
