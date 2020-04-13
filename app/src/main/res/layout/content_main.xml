@@ -210,21 +210,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/send_phone_number"
+        android:id="@+id/phototrap_changer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@android:string/ok"
-        app:layout_constraintStart_toEndOf="@+id/phone_number"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/phone_number"
-        android:layout_width="282dp"
-        android:layout_height="46dp"
-        android:ems="10"
-        android:hint="Tel. cislo kamery"
-        android:inputType="phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Vybrat fotopascu"
+        app:layout_constraintBottom_toTopOf="@+id/photo_video"
+        app:layout_constraintStart_toStartOf="@+id/photo_video" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

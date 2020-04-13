@@ -50,6 +50,13 @@ class DatabaseHelper(context: Context) :
             return res
         }
 
+    val allNames : Cursor
+    get() {
+        val db = this.writableDatabase
+        val res = db.rawQuery("SELECT $COL_2 FROM $TABLE_NAME", null)
+        return res
+    }
+
     companion object {
         val DATABASE_NAME = "phototraps.db"
         val TABLE_NAME = "photoraps_table"

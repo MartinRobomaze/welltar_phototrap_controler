@@ -5,8 +5,6 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.telephony.PhoneNumberUtils
 import android.telephony.SmsManager
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +14,6 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -43,22 +40,18 @@ class MainActivity : AppCompatActivity() {
 
         val statusText = findViewById<TextView>(R.id.state)
 
-        val phoneNumberInput = findViewById<EditText>(R.id.phone_number)
-        val sendPhoneNumberButton = findViewById<Button>(R.id.send_phone_number)
-        sendPhoneNumberButton.setOnClickListener {
-            phoneNumber = PhoneNumberUtils.formatNumber(phoneNumberInput.text.toString())
-            statusText.text = phoneNumber
+        val changePhototrap = findViewById<Button>(R.id.phototrap_changer)
+        changePhototrap.setOnClickListener {
+            startActivity(Intent(this, PhototrapMenu::class.java))
         }
 
         val photoVideoSwitch = findViewById<Switch>(R.id.photo_video)
         photoVideoSwitch.setOnCheckedChangeListener { _, isChecked ->
             statusText.text = "Sprava odoslana"
 
-            val data: String
-
-            when (isChecked) {
-                true -> data = "02"
-                false -> data = "01"
+            val data = when (isChecked) {
+                true -> "02"
+                false -> "01"
             }
 
             sendSMS("01", data)
@@ -159,4 +152,6 @@ class MainActivity : AppCompatActivity() {
             piSent, piDelivered
         )
     }
+
+
 }
