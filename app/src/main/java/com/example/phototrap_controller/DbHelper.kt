@@ -48,6 +48,12 @@ class DatabaseHelper(context: Context) :
         return res
     }
 
+    fun getID(name: String) : Cursor {
+        val db = this.writableDatabase
+        val res = db.rawQuery("SELECT $COL_1 FROM $TABLE_NAME WHERE $COL_2 = $name", null)
+        return res
+    }
+
     val allData : Cursor
         get() {
             val db = this.writableDatabase

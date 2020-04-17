@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".EditPhototrapActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Edit/delete phototrap" />
+
     <EditText
         android:id="@+id/phototrap_name"
         android:layout_width="269dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="Meno"
+        android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +34,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="Tel. cislo"
+        android:hint="Phone number"
         android:inputType="phone"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/phototrap_name" />
@@ -33,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Meno fotopasce: "
+        android:text="Phototrap name: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Tel. cislo fotopasce: "
+        android:text="Phototrap phone number: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -54,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Ulozit"
+        android:text="save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -64,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Vymazat"
+        android:text="delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

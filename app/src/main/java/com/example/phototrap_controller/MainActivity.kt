@@ -14,24 +14,23 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 private const val SENT = "SMS_SENT"
 private const val DELIVERED = "SMS_DELIVERED"
+var name = ""
 var phoneNumber = ""
 private const val SEND_SUCCESS_MESSAGE = "MMS commands executed successfully!"
+private const val RESULT_CODE = 3
 
 class MainActivity : AppCompatActivity() {
 
     var status = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val requestReceiveSMS = 2
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS),
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         val changePhototrap = findViewById<Button>(R.id.phototrap_changer)
         changePhototrap.setOnClickListener {
-            startActivity(Intent(this, PhototrapMenu::class.java))
+            startActivityForResult(Intent(this, PhototrapMenu::class.java), RESULT_CODE)
         }
 
         val photoVideoSwitch = findViewById<Switch>(R.id.photo_video)
@@ -153,5 +152,19 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == RESULT_CODE) {
+            if (data != null) {
+                if (data.hasExtra("name") && data.hasExtra("phone_number")) {
+                    data.getStringExtra("name")?.let {
+                        name = it
+                    }
+                    data.getStringExtra("phone_number")?.let {
+                        phoneNumber = it
+                    }
+                }
+            }
+        }
+    }
 }
