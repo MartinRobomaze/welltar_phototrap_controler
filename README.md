@@ -1,2 +1,2 @@
 # welltar_phototrap_controler
-Mobile app for controlling Welltar phototraps via SMS.
+Quick and dirty mobile app for controlling Welltar phototraps via SMS.
